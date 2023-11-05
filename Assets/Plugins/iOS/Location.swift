@@ -1,15 +1,19 @@
 import CoreLocation
 
-public class HighResLocation {
-    private var longitude : Double
-    private var latitude : Double
-    private var altitude : Double
-    private var ellipsoidalHeight : Double
+public class HighResLocation: NSObject {
+    private var longitude : Double = 0.0
+    private var latitude : Double = 0.0
+    private var altitude : Double = 0.0
+    private var ellipsoidalHeight : Double = 0.0
 
-    private var isLocalized : Bool
+    private var isLocalized : Bool = false
 
     private var locationManager : CLLocationManager!
 
+    override init(){
+        
+    }
+    
     public func startLocation() -> Bool {
         locationManager = CLLocationManager()
 
@@ -59,7 +63,7 @@ public class HighResLocation {
 }
 
 extension HighResLocation: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         guard let newLocation = locations.last else { return }
         self.longitude = newLocation.coordinate.longitude
         self.latitude = newLocation.coordinate.latitude
